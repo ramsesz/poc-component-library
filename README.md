@@ -4,9 +4,130 @@ A Vue 3 component library built as Web Components (Custom Elements), making it f
 
 ## Installation
 
+### NPM
+
 ```bash
 npm install @cubitec/component-library
 ```
+
+### CDN (via GitHub Releases)
+
+You can use this library directly from a CDN without installing it via npm. This is useful for quick prototypes, static HTML pages, or when you want to avoid build tooling.
+
+#### Using jsDelivr (Recommended)
+
+[jsDelivr](https://www.jsdelivr.com/) automatically serves files from GitHub releases. Replace `YOUR_USERNAME` and `YOUR_REPO` with your actual GitHub repository details, and `VERSION` with the release version (e.g., `1.0.0`):
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Component Library CDN Example</title>
+</head>
+<body>
+  <div id="app">
+    <cubitec-button label="Click me" variant="primary"></cubitec-button>
+    <cubitec-button variant="secondary">Secondary</cubitec-button>
+  </div>
+
+  <!-- Load the library from jsDelivr CDN -->
+  <script src="https://cdn.jsdelivr.net/gh/YOUR_USERNAME/YOUR_REPO@VERSION/dist/index.umd.js"></script>
+  
+  <!-- Components are auto-registered, ready to use! -->
+  <script>
+    // Optional: Access the global if needed
+    // const { registerComponents } = CubitecComponentLibrary;
+    
+    // Components are already registered, so you can use them immediately
+    document.querySelector('cubitec-button').addEventListener('click', (e) => {
+      console.log('Button clicked!', e);
+    });
+  </script>
+</body>
+</html>
+```
+
+**Example with actual version:**
+```html
+<script src="https://cdn.jsdelivr.net/gh/cubitec/component-library@0.0.1/dist/index.umd.js"></script>
+```
+
+**Using latest release:**
+```html
+<script src="https://cdn.jsdelivr.net/gh/cubitec/component-library@latest/dist/index.umd.js"></script>
+```
+
+#### Using unpkg (Alternative)
+
+If you publish to npm, you can also use [unpkg](https://unpkg.com/):
+
+```html
+<script src="https://unpkg.com/@cubitec/component-library@latest/dist/index.umd.js"></script>
+```
+
+#### Using in Vue Applications via CDN
+
+If you're using Vue 2 or Vue 3 via CDN, you can use the component library alongside it:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vue + Component Library</title>
+  <script src="https://unpkg.com/vue@2/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <cubitec-button 
+      label="Click me" 
+      variant="primary"
+      @click="handleClick"
+    ></cubitec-button>
+  </div>
+
+  <!-- Load component library -->
+  <script src="https://cdn.jsdelivr.net/gh/YOUR_USERNAME/YOUR_REPO@VERSION/dist/index.umd.js"></script>
+  
+  <script>
+    // Configure Vue 2 to recognize custom elements
+    Vue.config.ignoredElements = [/^cubitec-/];
+    
+    new Vue({
+      el: '#app',
+      methods: {
+        handleClick(event) {
+          console.log('Button clicked!', event);
+        }
+      }
+    });
+  </script>
+</body>
+</html>
+```
+
+#### Publishing a Release
+
+To make your library available via CDN:
+
+1. **Create a GitHub Release:**
+   ```bash
+   # Build the library
+   npm run build
+   
+   # Create a git tag (the workflow will automatically create a release)
+   # Use semantic versioning format: MAJOR.MINOR.PATCH (e.g., 0.0.1, 1.2.3)
+   git tag 0.0.1
+   git push origin 0.0.1
+   ```
+
+2. **The GitHub Actions workflow** (`.github/workflows/release.yml`) will automatically:
+   - Run tests
+   - Build the library
+   - Create a GitHub Release with the built files attached
+
+3. **Access via CDN:**
+   - jsDelivr: `https://cdn.jsdelivr.net/gh/YOUR_USERNAME/YOUR_REPO@0.0.1/dist/index.umd.js`
+   - Replace `YOUR_USERNAME` and `YOUR_REPO` with your GitHub repository details
 
 ## Usage in Vue 2
 
