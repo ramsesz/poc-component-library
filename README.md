@@ -60,14 +60,21 @@ Publish with `npm publish` (and match the version to your release tag if you use
 </html>
 ```
 
-#### Publishing a release (GitHub only, no dist in repo)
+#### Publishing a release (GitHub + npm)
 
-1. Create a version tag and push; the workflow builds and attaches the files to the release:
+1. **npm scope `@cubitec`**  
+   The package name is `@cubitec/component-library`. To publish it you must either:
+   - **Create an npm organization** named [cubitec](https://www.npmjs.com/org/create) and publish as that org, or  
+   - **Use your npm username** as the scope: in `package.json` set `"name": "@YOUR_NPM_USERNAME/component-library"` (then update imports/docs that reference the package name).
+
+2. **Add npm token** (one-time): In the repo go to **Settings → Secrets and variables → Actions**, add a secret `NPM_TOKEN` with an [npm access token](https://www.npmjs.com/settings/~/tokens) (Automation type). The token must be for an account that can publish to the chosen scope (org member or your user). If you see "Access token expired or revoked", create a new token and update the secret.
+
+3. Create a version tag and push; the workflow builds, creates the GitHub release, and publishes to npm:
    ```bash
    git tag 0.0.1
    git push origin 0.0.1
    ```
-2. Use the **direct link** from the release (Option 1 above). For **CDN** usage, publish to npm and use Option 2.
+4. Use the **direct link** from the release (Option 1) or the **CDN** URL from npm (Option 2).
 
 ## Usage in Vue 2
 
