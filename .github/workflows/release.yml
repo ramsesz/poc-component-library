@@ -63,13 +63,15 @@ jobs:
             ## Release ${{ steps.get_version.outputs.VERSION }}
             
             ### Files
-            - `index.umd.js` - UMD bundle for browser/CDN usage
+            - `index.umd.js` - UMD bundle for browser usage
             - `index.esm.js` - ES module bundle for modern bundlers
             
-            ### CDN Usage
+            ### Browser usage (direct link from this release)
             ```html
-            <script src="https://cdn.jsdelivr.net/gh/${{ github.repository }}@${{ steps.get_version.outputs.VERSION }}/dist/index.umd.js"></script>
+            <script src="https://github.com/${{ github.repository }}/releases/download/${{ steps.get_version.outputs.VERSION }}/index.umd.js"></script>
             ```
+            For **CDN** usage (faster, cached), publish this package to npm; then use:
+            `https://cdn.jsdelivr.net/npm/@cubitec/component-library@${{ steps.get_version.outputs.VERSION }}/dist/index.umd.js`
           draft: false
           prerelease: false
         env:
