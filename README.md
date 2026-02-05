@@ -33,6 +33,7 @@ registerComponents()
 | `npm run test:coverage` | Tests + coverage (report in `coverage/`) |
 | `npm run storybook` | Dev Storybook (localhost:6006) |
 | `npm run build-storybook` | Build static Storybook |
+| `npm run release` | Semantic release (changelog + version + publish) |
 
 Coverage is also uploaded as Actions artifacts and summarized in PR comments.
 
@@ -47,9 +48,12 @@ To enable the live site, set **Settings → Pages → Source** to **GitHub Actio
 
 ## Releasing
 
-1. Add repo secret `NPM_TOKEN` (npm Automation token). For `@cubitec` scope, create the [npm org](https://www.npmjs.com/org/create) first.
-2. Push a version tag: `git tag 0.0.1 && git push origin 0.0.1`
-3. The workflow builds, creates the GitHub release, and publishes to npm.
+Releases are driven by [semantic-release](https://semantic-release.gitbook.io/): version and [CHANGELOG.md](./CHANGELOG.md) are derived from [Conventional Commits](https://www.conventionalcommits.org/) on `main` (e.g. `feat:` → minor, `fix:` → patch, `BREAKING CHANGE:` → major).
+
+- **CI:** Pushing to `main` runs the release workflow; if there are relevant commits, it bumps the version, updates the changelog, creates a Git tag and GitHub release, and publishes to npm.
+- **Local:** `npm run release` (dry run by default; use `npm run release -- --no-ci` to actually release from your machine).
+
+**Setup:** Add the `NPM_TOKEN` secret (npm Automation token). For the `@cubitec` scope, create the [npm org](https://www.npmjs.com/org/create) first.
 
 ## License
 

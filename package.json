@@ -26,7 +26,8 @@
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "release": "semantic-release"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^7.6.0",
@@ -46,7 +47,11 @@
     "vite": "^5.0.0",
     "vitest": "^1.0.0",
     "vue": "^3.4.0",
-    "vue-tsc": "^2.0.0"
+    "vue-tsc": "^2.0.0",
+    "semantic-release": "^24.0.0",
+    "@semantic-release/changelog": "^6.0.0",
+    "@semantic-release/git": "^10.0.0",
+    "@semantic-release/exec": "^6.0.0"
   },
   "keywords": [
     "vue",
